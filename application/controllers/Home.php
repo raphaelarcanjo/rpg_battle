@@ -33,8 +33,6 @@ class Home extends CI_Controller {
 		);
 		$data['h_iniciativa'] = rand(1,20) + $personagens['humano']['agi'];
 		$data['o_iniciativa'] = rand(1,20) + $personagens['orc']['agi'];
-		var_dump($data['h_iniciativa']);
-		var_dump($data['o_iniciativa']);die;
 		$data['personagens'] = $personagens;
 		$data['armas'] = $armas;
 		$data['page_title'] = 'Batalha RPG';
