@@ -20,11 +20,12 @@
             <tr>
               <td class="d-block px-0">
                 <h4 class="text-capitalize">
-                  <?php echo $personagens[0]; ?>
+                  <?php echo $personagens[0]; ?> PV = <?php echo $h_pv; ?> / <?php echo $personagens['humano']['pv']; ?>
                 </h4>
                 <p class="text-capitalize">
                   Equip ( <?php foreach(explode('_',$armas[0]) as $key => $entry) echo $entry.' '; echo '-> atq = '.$armas['espada_longa']['atq'].' / def = '.$armas['espada_longa']['def']; ?> dano = 1d8 )
                 </p>
+                <p>Iniciativa = <?php echo $h_iniciativa; ?></p>
               </td>
             </tr>
             <tr>
@@ -62,11 +63,12 @@
             <tr>
               <td class="px-0">
                 <h4 class="text-capitalize">
-                  <?php echo $personagens[1]; ?>
+                  <?php echo $personagens[1]; ?> PV = <?php echo $o_pv; ?> / <?php echo $personagens['orc']['pv']; ?>
                 </h4>
                 <p class="text-capitalize">
                   Equip ( <?php foreach(explode('_',$armas[1]) as $key => $entry) echo $entry.' '; echo '-> atq = '.$armas['clava_madeira']['atq'].' / def = '.$armas['clava_madeira']['def']; ?> dano = 1d8 )
                 </p>
+                <p>Iniciativa = <?php echo $o_iniciativa; ?></p>
               </td>
             </tr>
             <tr>
