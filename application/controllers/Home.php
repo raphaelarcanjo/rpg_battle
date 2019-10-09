@@ -62,8 +62,10 @@ class Home extends CI_Controller {
 					$turno[$indice]['dano'] = $armas[$personagens['humano']['arma']]['dano'] + $personagens['humano']['for'];
 					$o_pv -= $turno[$indice]['dano'];
 				}
+				else $turno[$indice]['dano'] = 0;
 
-				$turno[$indice]['pv'] = $o_pv;
+				$turno[$indice]['o_pv'] = $o_pv;
+				$turno[$indice]['h_pv'] = $h_pv;
 				$indice++;
 
 				$turno[$indice]['ataque'] = rand(1,20) + $personagens['orc']['agi'] + $armas[$personagens['orc']['arma']]['atq'];
@@ -73,8 +75,10 @@ class Home extends CI_Controller {
 					$turno[$indice]['dano'] = $armas[$personagens['orc']['arma']]['dano'] + $personagens['orc']['for'];
 					$h_pv -= $turno[$indice]['dano'];
 				}
+				else $turno[$indice]['dano'] = 0;
 
-				$turno[$indice]['pv'] = $h_pv;
+				$turno[$indice]['o_pv'] = $o_pv;
+				$turno[$indice]['h_pv'] = $h_pv;
 				$indice++;
 			}
 
@@ -86,8 +90,10 @@ class Home extends CI_Controller {
 					$turno[$indice]['dano'] = $armas[$personagens['orc']['arma']]['dano'] + $personagens['orc']['for'];
 					$h_pv -= $turno[$indice]['dano'];
 				}
+				else $turno[$indice]['dano'] = 0;
 
-				$turno[$indice]['pv'] = $h_pv;
+				$turno[$indice]['o_pv'] = $o_pv;
+				$turno[$indice]['h_pv'] = $h_pv;
 				$indice++;
 
 				$turno[$indice]['ataque'] = rand(1,20) + $personagens['humano']['agi'] + $armas[$personagens['humano']['arma']]['atq'];
@@ -97,14 +103,16 @@ class Home extends CI_Controller {
 					$turno[$indice]['dano'] = $armas[$personagens['humano']['arma']]['dano'] + $personagens['humano']['for'];
 					$o_pv -= $turno[$indice]['dano'];
 				}
+				else $turno[$indice]['dano'] = 0;
 
-				$turno[$indice]['pv'] = $o_pv;
+				$turno[$indice]['o_pv'] = $o_pv;
+				$turno[$indice]['h_pv'] = $h_pv;
 				$indice++;
 			}
 			if($o_pv <= 0 or $h_pv <= 0) break;
 		}
-		var_dump($turno);
 
+		$data['turno'] = $turno;
 		$data['h_pv'] = $h_pv;
 		$data['o_pv'] = $o_pv;
 		$data['h_iniciativa'] = $h_iniciativa;
