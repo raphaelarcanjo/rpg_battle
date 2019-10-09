@@ -23,7 +23,7 @@
                   <?php echo $personagens[0]; ?> PV = <?php echo $h_pv; ?> / <?php echo $personagens['humano']['pv']; ?>
                 </h4>
                 <p class="text-capitalize">
-                  Equip ( <?php foreach(explode('_',$armas[0]) as $key => $entry) echo $entry.' '; echo '-> atq = '.$armas['espada_longa']['atq'].' / def = '.$armas['espada_longa']['def']; ?> dano = 1d8 )
+                  Equip ( <?php foreach(explode('_',$armas[0]) as $key => $entry) echo $entry.' '; echo '-> atq = '.$armas['espada_longa']['atq'].' / def = '.$armas['espada_longa']['def']; ?> dano = 1d6 )
                 </p>
                 <p>Iniciativa = <?php echo $h_iniciativa; ?></p>
               </td>

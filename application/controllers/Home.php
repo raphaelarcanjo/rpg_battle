@@ -9,6 +9,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		$indice = 0;
 		$turnos = array();
 
 		$personagens = array('humano','orc');
@@ -16,13 +17,15 @@ class Home extends CI_Controller {
 		$personagens['humano'] = array(
 			'pv' => 12,
 			'for' => 1,
-			'agi' => 2
+			'agi' => 2,
+			'arma' => 'espada_longa'
 		);
 
 		$personagens['orc'] = array(
 			'pv' => 20,
 			'for' => 2,
-			'agi' => 0
+			'agi' => 0,
+			'arma' => 'clava_madeira'
 		);
 
 		$h_pv = $personagens['humano']['pv'];
@@ -49,6 +52,58 @@ class Home extends CI_Controller {
 			$h_iniciativa = rand(1,20) + $personagens['humano']['agi'];
 			$o_iniciativa = rand(1,20) + $personagens['orc']['agi'];
 		}
+
+		while($o_pv > 0 or $h_pv > 0){
+			if($h_iniciativa > $o_iniciativa){
+				$turno[$indice]['ataque'] = rand(1,20) + $personagens['humano']['agi'] + $armas[$personagens['humano']['arma']]['atq'];
+				$turno[$indice]['defesa'] = rand(1,20) + $personagens['orc']['agi'] + $armas[$personagens['orc']['arma']]['def'];
+
+				if($turno[$indice]['ataque'] - $turno[$indice]['defesa'] > 0){
+					$turno[$indice]['dano'] = $armas[$personagens['humano']['arma']]['dano'] + $personagens['humano']['for'];
+					$o_pv -= $turno[$indice]['dano'];
+				}
+
+				$turno[$indice]['pv'] = $o_pv;
+				$indice++;
+
+				$turno[$indice]['ataque'] = rand(1,20) + $personagens['orc']['agi'] + $armas[$personagens['orc']['arma']]['atq'];
+				$turno[$indice]['defesa'] = rand(1,20) + $personagens['humano']['agi'] + $armas[$personagens['humano']['arma']]['def'];
+
+				if($turno[$indice]['ataque'] - $turno[$indice]['defesa'] > 0){
+					$turno[$indice]['dano'] = $armas[$personagens['orc']['arma']]['dano'] + $personagens['orc']['for'];
+					$h_pv -= $turno[$indice]['dano'];
+				}
+
+				$turno[$indice]['pv'] = $h_pv;
+				$indice++;
+			}
+
+			if($o_iniciativa > $h_iniciativa){
+				$turno[$indice]['ataque'] = rand(1,20) + $personagens['orc']['agi'] + $armas[$personagens['orc']['arma']]['atq'];
+				$turno[$indice]['defesa'] = rand(1,20) + $personagens['humano']['agi'] + $armas[$personagens['humano']['arma']]['def'];
+
+				if($turno[$indice]['ataque'] - $turno[$indice]['defesa'] > 0){
+					$turno[$indice]['dano'] = $armas[$personagens['orc']['arma']]['dano'] + $personagens['orc']['for'];
+					$h_pv -= $turno[$indice]['dano'];
+				}
+
+				$turno[$indice]['pv'] = $h_pv;
+				$indice++;
+
+				$turno[$indice]['ataque'] = rand(1,20) + $personagens['humano']['agi'] + $armas[$personagens['humano']['arma']]['atq'];
+				$turno[$indice]['defesa'] = rand(1,20) + $personagens['orc']['agi'] + $armas[$personagens['orc']['arma']]['def'];
+
+				if($turno[$indice]['ataque'] - $turno[$indice]['defesa'] > 0){
+					$turno[$indice]['dano'] = $armas[$personagens['humano']['arma']]['dano'] + $personagens['humano']['for'];
+					$o_pv -= $turno[$indice]['dano'];
+				}
+
+				$turno[$indice]['pv'] = $o_pv;
+				$indice++;
+			}
+			if($o_pv <= 0 or $h_pv <= 0) break;
+		}
+		var_dump($turno);
 
 		$data['h_pv'] = $h_pv;
 		$data['o_pv'] = $o_pv;
